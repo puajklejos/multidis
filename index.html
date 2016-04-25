@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Users</title>
+<link rel="stylesheet"  type="text/css" href="css/multi.css">
+<link href='//fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+
+	$("#tabla_insertar").hide();
+
+	$("#mostrar").click(function(){
+	    $.ajax(
+	    {
+	    url: "http://localhost/projectes/multidis/api/users",
+	    type: "GET",
+	    success: function(result){
+	        $("#tabla_mostrar").html(result);
+	    }});
+	});
+
+	$("#insertar").click(function(){
+		$("#tabla_mostrar").empty();
+		$("#tabla_insertar").show();
+	});
+
+	$("#insertar_button").click(function(){
+		var nombre = $('#nombre').val();
+		var email = $('#email').val();
+		var telefono = $('#telf').val();
+		var foto_perfil = $('#foto').val();
+		var rol = $('#rol').val();
+		var pass = $('#pass').val();
+		var poblacion = $('#pob').val(); 
+		var pais = $('#pais').val();
+
+	    $.ajax(
+	    {
+	    url: "http://localhost/wallapop_falso/api/users",
+	    type: "POST",
+	    data: {"nombre": nombre,
+	    	   "email": email,
+	    	   "telefono": telefono,
+	    	   "foto_perfil": foto_perfil,
+	    	   "rol": rol,
+	    	   "pass": pass,
+	    	   "poblacion": poblacion,
+	    	   "pais": pais 
+	    	  },
+	    success: function(result){
+	        alert('Usuario agregado a la Base de Datos');
+	    }});
+
+	});
+
+
+
+});
+
+</script>
+</head>
+<body>
+
+<header></header>
+
+<div class="contenedor">
+<div id="mostrar">Mostrar Usuarios</div>
+<div id="insertar">Insertar Usuario</div>
+</div>
+
+<div id="tabla_mostrar"></div>
+<div id="tabla_insertar">
+	
+	<form method="post" id="formulario">
+	<table border="1">
+		<tr>
+			<td>Nombre</td><td><input type="text" id="nombre"></td>
+		<tr>
+		<tr>
+			<td>Email</td><td><input type="text" id="email"></td>
+		<tr>
+		<tr>
+			<td>Telofono</td><td><input type="text" id="telf"></td>
+		<tr>
+		<tr>
+			<td>Foto Perfil</td><td><input type="text" id="foto"></td>
+		<tr>
+		<tr>
+			<td>Rol</td><td><input type="text" id="rol"></td>
+		<tr>
+		<tr>
+			<td>Password</td><td><input type="text" id="pass"></td>
+		<tr>
+		<tr>
+			<td>Poblacion</td><td><input type="text" id="pob"></td>
+		<tr>
+		<tr>
+			<td>Pais</td><td><input type="text" id="pais"></td>
+		<tr>
+	</table>
+	<center>
+		<input type="button" id="insertar_button" value="Insertar" style="
+	background-color: #96DD40;
+	padding: 5px;
+	padding-right: 10px; 
+	padding-left: 10px;
+	font-size: 16px;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-top: 5%">
+	</center>
+</form>
+
+</div>
+
+</body>
+</html>
